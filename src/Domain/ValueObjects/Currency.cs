@@ -11,7 +11,7 @@ namespace Domain.ValueObjects
         public readonly string IsoCode;
         public readonly string Symbol;
 
-        private Currency(string isoCode, string symbol)
+        internal Currency(string isoCode, string symbol)
         {
             IsoCode = isoCode;
             Symbol = symbol;

@@ -8,6 +8,26 @@ namespace Domain.Common
     {
         protected abstract IEnumerable<object> GetEqualityComponents();
 
+        public static bool operator ==(ValueObject left, ValueObject right)
+        {
+            if (left is null)
+            {
+                if (right is null)
+                {
+                    return true;
+                }
+
+                return false;
+            }
+
+            return left.Equals(right);
+        }
+
+        public static bool operator !=(ValueObject left, ValueObject right)
+        {
+            return !(left == right);
+        }
+
         public override bool Equals(object? obj)
         {
             if (obj == null || obj.GetType() != GetType())

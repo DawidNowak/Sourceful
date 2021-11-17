@@ -13,11 +13,10 @@ namespace Domain.UnitTests.ValueObjects
         public void ctor_SHOULD_instantiate_Currency_WHEN_valid_isoCode_is_passed()
         {
             //Arrange
-            var isoCode = "PLN";
-            var expectedCurr = CurrencyRepo.Get(isoCode);
+            var expectedCurr = CurrencyRepo.Get(Consts.PlnIsoCode);
 
             //Act
-            var actualCurr = new Currency(isoCode);
+            var actualCurr = new Currency(Consts.PlnIsoCode);
 
             //Assert
             actualCurr.Should().Be(expectedCurr);
@@ -31,6 +30,34 @@ namespace Domain.UnitTests.ValueObjects
 
             //Act & Assert
             action.Should().Throw<ArgumentException>();
+        }
+
+        [Fact]
+        public void two_Currency_SHOULD_be_equal_WHEN_they_have_the_same_values()
+        {
+            //Arrange
+            var first = new Currency(Consts.PlnIsoCode, Consts.PlnSymbol);
+            var second = new Currency(Consts.PlnIsoCode, Consts.PlnSymbol);
+
+            //Act
+            var areEqual = first == second;
+
+            //Assert
+            areEqual.Should().BeTrue();
+        }
+
+        [Fact]
+        public void two_Currency_SHOULD_not_be_equal_WHEN_they_have_different_values()
+        {
+            //Arrange
+            var first = new Currency(Consts.PlnIsoCode, "symbol1");
+            var second = new Currency(Consts.PlnIsoCode, "symbol2");
+
+            //Act
+            var areEqual = first == second;
+
+            //Assert
+            areEqual.Should().BeFalse();
         }
     }
 }
