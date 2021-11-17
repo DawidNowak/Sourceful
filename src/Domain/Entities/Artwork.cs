@@ -14,12 +14,15 @@ namespace Domain.Entities
         private DateTime _created;
         private string _creator;
 
+        private Guid _galleryId;
+
         private Guid? _boughtByCustomerId;
         private Guid? _reservationCustomerId;
 
-        internal Artwork(Guid id, string name, Money price, DateTime created, string creator)
+        internal Artwork(Guid id, Guid galleryId, string name, Money price, DateTime created, string creator)
         {
             Id = id;
+            _galleryId = galleryId;
             _name = name;
             _price = price;
             _created = created;

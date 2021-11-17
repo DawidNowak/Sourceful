@@ -17,6 +17,7 @@ namespace Domain.UnitTests.Entities
         private const string Creator = "Author";
 
         private static Guid Id = Guid.NewGuid();
+        private static Guid GalleryId = Guid.NewGuid();
         private static Guid CustomerId = Guid.NewGuid();
         private static DateTime Created = DateTime.Now;
         private static Money Price = new(1000m, new("PLN"));
@@ -25,7 +26,7 @@ namespace Domain.UnitTests.Entities
         public void buy_artwork_SHOULD_publish_bought_event_WHEN_no_reservation_is_made_AND_was_not_sold_already()
         {
             //Arrange
-            var artwork = new Artwork(Id, Name, Price, Created, Creator);
+            var artwork = new Artwork(Id, GalleryId, Name, Price, Created, Creator);
 
             //Act
             artwork.Buy(CustomerId);
@@ -42,7 +43,7 @@ namespace Domain.UnitTests.Entities
         public void reserve_artwork_SHOULD_publish_event_WHEN_no_reservation_is_made_AND_was_not_sold_already()
         {
             //Arrange
-            var artwork = new Artwork(Id, Name, Price, Created, Creator);
+            var artwork = new Artwork(Id, GalleryId, Name, Price, Created, Creator);
             var customer = new Customer(CustomerId, true);
 
             //Act
@@ -59,7 +60,7 @@ namespace Domain.UnitTests.Entities
         public void buy_artwork_SHOULD_throw_exception_WHEN_already_sold()
         {
             //Arrange
-            var artwork = new Artwork(Id, Name, Price, Created, Creator);
+            var artwork = new Artwork(Id, GalleryId, Name, Price, Created, Creator);
             artwork.Buy(CustomerId);
 
             //Act
@@ -75,7 +76,7 @@ namespace Domain.UnitTests.Entities
             //Arrange
             var otherCustomer = new Customer(Guid.NewGuid(), true);
 
-            var artwork = new Artwork(Id, Name, Price, Created, Creator);
+            var artwork = new Artwork(Id, GalleryId, Name, Price, Created, Creator);
             artwork.Reserve(otherCustomer.Id, SetupCustomerRepositoryMock(otherCustomer));
 
             //Act
