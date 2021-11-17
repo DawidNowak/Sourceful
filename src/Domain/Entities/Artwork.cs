@@ -46,7 +46,9 @@ namespace Domain.Entities
 
         public void Reserve(Guid customerId, ICustomerRepository customerRepository)
         {
-            //TODO: conditional logic can be extracted into policy with CanReserve method.
+            //******************************************
+            //TODO: EXTRACT VALIDATION LOGIC TO A POLICY
+            //******************************************
 
             if (_boughtByCustomerId == customerId)
             {

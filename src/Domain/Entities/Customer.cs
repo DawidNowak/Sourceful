@@ -1,19 +1,19 @@
-﻿using Domain.Common;
-using System;
+﻿using System;
 
 namespace Domain.Entities
 {
-    public class Customer : AggregateRoot
+    /// <summary>
+    /// In Artwork bounded context Customer is not an aggregate root,
+    /// here we need only information about it's ID and Vip status
+    /// </summary>
+    public class Customer
     {
-        private string _firstName;
-        private string _lastName;
+        public Guid Id;
         private bool _isVip;
 
-        public Customer(Guid id, string firstName, string lastName, bool isVip)
+        public Customer(Guid id, bool isVip)
         {
             Id = id;
-            _firstName = firstName;
-            _lastName = lastName;
             _isVip = isVip;
         }
 

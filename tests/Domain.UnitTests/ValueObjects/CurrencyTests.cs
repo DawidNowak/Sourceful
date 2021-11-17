@@ -29,7 +29,7 @@ namespace Domain.UnitTests.ValueObjects
             Action action = () => new Currency("Fake iso code");
 
             //Act & Assert
-            action.Should().Throw<ArgumentException>();
+            action.Should().ThrowExactly<ArgumentException>();
         }
 
         [Fact]
