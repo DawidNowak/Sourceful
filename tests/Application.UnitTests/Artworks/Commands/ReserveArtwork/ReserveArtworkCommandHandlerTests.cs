@@ -1,4 +1,5 @@
 ﻿using Application.Artworks.Commands.ReserveArtwork;
+using Application.Exceptions;
 using Domain.Contracts;
 using Domain.Entities;
 using Domain.Events;
@@ -51,6 +52,29 @@ namespace Application.UnitTests.Artworks.Commands.ReserveArtwork
 
             var @event = artwork.GetUnpublishedEvents().Last();
             @event.Should().BeOfType<ArtworkReservedEvent>();
+        }
+
+        [Fact]
+        public void handler_SHOULD_throw_axception_WHEN_artwork_not_found()
+        {
+            //Arrange
+            var artworkRepoMock = new Mock<IArtworkRepository>();
+            artworkRepoMock.Setup(m => m.GetAsync(It.IsAny<Guid>()))
+                .ReturnsAsync((Artwork)null)
+                .Verifiable();
+
+            var command = new ReserveArtworkCommand
+            {
+                ArtworkId = Consts.ArtworkId
+            };
+
+            var handler = new ReserveArtworkCommandHandler(artworkRepoMock.Object, null);
+
+            //Act
+            Func<Task> func = async () => await handler.Handle(command, CancellationToken.None);
+
+            //Assert
+            func.Should().ThrowAsync<ArtworkNotFoundException>();
         }
     }
 }
