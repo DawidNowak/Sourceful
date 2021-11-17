@@ -11,7 +11,7 @@ namespace Domain.Entities
     {
         private string _name;
         private Money _price;
-        private DateTime _created;
+        private DateTime? _created;
         private string _creator;
 
         private Guid _galleryId;
@@ -19,7 +19,7 @@ namespace Domain.Entities
         private Guid? _boughtByCustomerId;
         private Guid? _reservationCustomerId;
 
-        internal Artwork(Guid id, Guid galleryId, string name, Money price, DateTime created, string creator)
+        internal Artwork(Guid id, Guid galleryId, string name, Money price, DateTime? created, string creator)
         {
             Id = id;
             _galleryId = galleryId;
