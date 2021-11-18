@@ -4,97 +4,97 @@ using Domain.Events;
 using Domain.Exceptions;
 using Domain.ValueObjects;
 using System;
+using System.Threading.Tasks;
 
 namespace Domain.Entities
 {
     public class Artwork : AggregateRoot
     {
-        private string _name;
-        private Money _price;
-        private DateTime? _created;
-        private string _creator;
-
-        private Guid _galleryId;
-
-        private Guid? _boughtByCustomerId;
-        private Guid? _reservationCustomerId;
+        public string Name { get; private set; }
+        public Money Price { get; private set; }
+        public DateTime? Created { get; private set; }
+        public string Creator { get; private set; }
+        public Guid ArtGalleryId { get; private set; }
+        public Guid? BoughtByCustomerId { get; private set; }
+        public Guid? ReservationCustomerId { get; private set; }
 
         internal Artwork(Guid id, Guid galleryId, string name, Money price, DateTime? created, string creator)
+            : base(id)
         {
-            Id = id;
-            _galleryId = galleryId;
-            _name = name;
-            _price = price;
-            _created = created;
-            _creator = creator;
+            ArtGalleryId = galleryId;
+            Name = name;
+            Price = price;
+            Created = created;
+            Creator = creator;
 
             PublishEvent(new ArtworkCreatedEvent(Id, name, price, created, creator));
         }
 
         public void Buy(Guid customerId)
         {
-            if (_boughtByCustomerId != null)
+            if (BoughtByCustomerId != null)
             {
                 throw new ArtworkAlreadyBoughtException();
             }
 
-            if (_reservationCustomerId != null && _reservationCustomerId != customerId)
+            if (ReservationCustomerId != null && ReservationCustomerId != customerId)
             {
                 throw new ArtworkReservedByOtherCustomerException();
             }
 
-            _boughtByCustomerId = customerId;
+            BoughtByCustomerId = customerId;
             PublishEvent(new ArtworkBoughtEvent(Id, customerId));
         }
 
-        public void Reserve(Guid customerId, ICustomerRepository customerRepository)
+        public async Task ReserveAsync(Guid customerId, ICustomerRepository customerRepository)
         {
             //******************************************
             //TODO: EXTRACT VALIDATION LOGIC TO A POLICY
             //******************************************
 
-            if (_boughtByCustomerId == customerId)
+            if (BoughtByCustomerId == customerId)
             {
                 throw new ArtworkAlreadyBoughtByCustomerException();
             }
 
-            if (_boughtByCustomerId != null)
+            if (BoughtByCustomerId != null)
             {
                 throw new ArtworkAlreadyBoughtException();
             }
 
-            if (customerRepository.Get(customerId)?.CanReserve() == false)
+            if ((await customerRepository.GetByIdAsync(customerId))?.CanReserve() == false)
             {
                 throw new CustomerCantReserveArtworkException();
             }
 
-            if (_reservationCustomerId == customerId)
+            if (ReservationCustomerId == customerId)
             {
                 throw new ArtworkAlreadyReservedByCustomerException();
             }
 
-            if (_reservationCustomerId != null)
+            if (ReservationCustomerId != null)
             {
                 throw new ArtworkAlreadyReservedException();
             }
 
-            _reservationCustomerId = customerId;
+            ReservationCustomerId = customerId;
             PublishEvent(new ArtworkReservedEvent(Id, customerId));
         }
 
         public void RevokeReservation(Guid customerId)
         {
-            if (_reservationCustomerId == null)
+            if (ReservationCustomerId == null)
             {
                 throw new ArtworkNotReservedException();
             }
 
-            if (_reservationCustomerId == customerId)
+            if (ReservationCustomerId == customerId)
             {
                 throw new ArtworkReservedByOtherCustomerException();
             }
 
-            _reservationCustomerId = null;
+            ReservationCustomerId = null;
+            PublishEvent(new ArtworkReservationRevokedEvent(Id, customerId));
         }
     }
 }

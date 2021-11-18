@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Domain.Common;
+using System;
+using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -6,14 +8,15 @@ namespace Domain.Entities
     /// Simmilarly to Customer, ArtGallery will probably have it's own bounded context.
     /// Here we need only ID and Name
     /// </summary>
-    public class ArtGallery
+    public class ArtGallery : Entity
     {
-        public Guid Id { get; }
-        public string Name { get; }
+        private List<Artwork> _artworks = new();
 
-        public ArtGallery(Guid id, string name)
+        public string Name { get; }
+        public IReadOnlyCollection<Artwork> Artworks => _artworks;
+
+        public ArtGallery(Guid id, string name) : base(id)
         {
-            Id = id;
             Name = name;
         }
     }

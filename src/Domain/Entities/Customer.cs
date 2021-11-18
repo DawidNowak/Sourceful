@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Domain.Common;
+using System;
 
 namespace Domain.Entities
 {
@@ -8,21 +9,20 @@ namespace Domain.Entities
     /// Clients will be added into db by IntegrationEventHandler as a result of
     /// emiting ClientCreatedIntegrationEvent from CustomerBoundedContext
     /// </summary>
-    public class Customer
+    public class Customer : Entity
     {
-        private bool _isVip;
 
-        public Guid Id { get; }
+        public bool IsVip { get; private set; }
 
-        public Customer(Guid id, bool isVip)
+
+        public Customer(Guid id, bool isVip) : base(id)
         {
-            Id = id;
-            _isVip = isVip;
+            IsVip = isVip;
         }
 
         public bool CanReserve()
         {
-            return _isVip;
+            return IsVip;
         }
     }
 }

@@ -21,7 +21,7 @@ namespace Application.Artworks.Commands.CreateArtwork
             _artworkRepository = artworkRepository;
         }
 
-        public Task<Guid> Handle(CreateArtworkCommand request, CancellationToken cancellationToken)
+        public async Task<Guid> Handle(CreateArtworkCommand request, CancellationToken cancellationToken)
         {
             var id = Guid.NewGuid();
             var price = new Money(request.Price, new Currency(request.CurrencyIsoCode));
@@ -29,9 +29,9 @@ namespace Application.Artworks.Commands.CreateArtwork
             var artwork = _artworkFactory.Create(
                 id, request.GalleryId, request.Name, price, request.Created, request.Creator);
 
-            _artworkRepository.Save(artwork);
+            await _artworkRepository.SaveAsync(artwork);
 
-            return Task.FromResult(id);
+            return id;
         }
     }
 }

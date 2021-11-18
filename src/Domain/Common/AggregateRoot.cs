@@ -3,11 +3,14 @@ using System.Collections.Generic;
 
 namespace Domain.Common
 {
-    public abstract class AggregateRoot : IHasDomainEvent
+    public abstract class AggregateRoot : Entity, IHasDomainEvent
     {
         private readonly List<DomainEvent> _events = new();
 
-        public Guid Id { get; protected set; }
+        protected AggregateRoot(Guid id) : base(id)
+        {
+        }
+
 
         public IEnumerable<DomainEvent> GetUnpublishedEvents()
         {

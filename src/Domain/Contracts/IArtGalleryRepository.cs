@@ -1,10 +1,8 @@
 ﻿using Domain.Entities;
-using System;
 
 namespace Domain.Contracts
 {
-    public interface IArtGalleryRepository
+    public interface IArtGalleryRepository : IRepository<ArtGallery>
     {
-        ArtGallery Get(Guid id);
     }
 }

@@ -1,10 +1,8 @@
 ﻿using Domain.Entities;
-using System;
 
 namespace Domain.Contracts
 {
-    public interface ICustomerRepository
+    public interface ICustomerRepository : IRepository<Customer>
     {
-        Customer Get(Guid id);
     }
 }

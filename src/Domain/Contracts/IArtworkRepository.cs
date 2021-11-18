@@ -1,12 +1,10 @@
 ﻿using Domain.Entities;
-using System;
 using System.Threading.Tasks;
 
 namespace Domain.Contracts
 {
-    public interface IArtworkRepository
+    public interface IArtworkRepository : IRepository<Artwork>
     {
-        Task<Artwork> GetAsync(Guid id);
-        void Save(Artwork artwork);
+        Task SaveAsync(Artwork artwork);
     }
 }

@@ -18,7 +18,7 @@ namespace Application.UnitTests.Artworks.Commands.CreateArtwork
         {
             //Arrange
             var artworkRepoMock = new Mock<IArtworkRepository>();
-            artworkRepoMock.Setup(x => x.Save(It.IsAny<Artwork>()))
+            artworkRepoMock.Setup(x => x.SaveAsync(It.IsAny<Artwork>()))
                 .Verifiable();
 
             var artworkFactory = new ArtworkFactory();
@@ -40,7 +40,7 @@ namespace Application.UnitTests.Artworks.Commands.CreateArtwork
 
             //Assert
             artworkId.Should().NotBeEmpty();
-            artworkRepoMock.Verify(r => r.Save(It.IsAny<Artwork>()), Times.Once);
+            artworkRepoMock.Verify(r => r.SaveAsync(It.IsAny<Artwork>()), Times.Once);
         }
     }
 }

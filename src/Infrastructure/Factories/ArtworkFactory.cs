@@ -1,14 +1,10 @@
 ﻿using Domain.Entities;
+using Domain.Factories;
 using Domain.ValueObjects;
 using System;
 
-namespace Domain.Factories
+namespace Infrastructure.Factories
 {
-    public interface IArtworkFactory
-    {
-        Artwork Create(Guid id, Guid galleryId, string name, Money price, DateTime? created, string creator);
-    }
-
     public class ArtworkFactory : IArtworkFactory
     {
         public Artwork Create(Guid id, Guid galleryId, string name, Money price, DateTime? created, string creator)

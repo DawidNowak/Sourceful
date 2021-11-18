@@ -47,7 +47,7 @@ namespace Domain.UnitTests.Entities
             var customer = new Customer(CustomerId, true);
 
             //Act
-            artwork.Reserve(CustomerId, SetupCustomerRepositoryMock(customer));
+            artwork.ReserveAsync(CustomerId, SetupCustomerRepositoryMock(customer));
 
             //Assert
             var events = artwork.GetUnpublishedEvents();
@@ -77,7 +77,7 @@ namespace Domain.UnitTests.Entities
             var otherCustomer = new Customer(Guid.NewGuid(), true);
 
             var artwork = new Artwork(Id, GalleryId, Name, Price, Created, Creator);
-            artwork.Reserve(otherCustomer.Id, SetupCustomerRepositoryMock(otherCustomer));
+            artwork.ReserveAsync(otherCustomer.Id, SetupCustomerRepositoryMock(otherCustomer));
 
             //Act
             Action action = () => artwork.Buy(CustomerId);
@@ -93,8 +93,8 @@ namespace Domain.UnitTests.Entities
         private static ICustomerRepository SetupCustomerRepositoryMock(Customer customer)
         {
             var mock = new Mock<ICustomerRepository>();
-            mock.Setup(m => m.Get(customer.Id))
-                .Returns(customer);
+            mock.Setup(m => m.GetByIdAsync(customer.Id))
+                .ReturnsAsync(customer);
 
             return mock.Object;
         }

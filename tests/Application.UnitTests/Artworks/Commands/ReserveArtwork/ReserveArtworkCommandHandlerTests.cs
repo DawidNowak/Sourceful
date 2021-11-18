@@ -25,13 +25,13 @@ namespace Application.UnitTests.Artworks.Commands.ReserveArtwork
             var customer = new Customer(Consts.CustomerId, true);
 
             var artworkRepoMock = new Mock<IArtworkRepository>();
-            artworkRepoMock.Setup(m => m.GetAsync(It.IsAny<Guid>()))
+            artworkRepoMock.Setup(m => m.GetByIdAsync(It.IsAny<Guid>()))
                 .ReturnsAsync(artwork)
                 .Verifiable();
 
             var customerRepoMock = new Mock<ICustomerRepository>();
-            customerRepoMock.Setup(m => m.Get(It.IsAny<Guid>()))
-                .Returns(customer)
+            customerRepoMock.Setup(m => m.GetByIdAsync(It.IsAny<Guid>()))
+                .ReturnsAsync(customer)
                 .Verifiable();
 
 
@@ -47,8 +47,8 @@ namespace Application.UnitTests.Artworks.Commands.ReserveArtwork
             await handler.Handle(command, CancellationToken.None);
 
             //Assert
-            artworkRepoMock.Verify(m => m.GetAsync(Consts.ArtworkId), Times.Once);
-            customerRepoMock.Verify(m => m.Get(Consts.CustomerId), Times.Once);
+            artworkRepoMock.Verify(m => m.GetByIdAsync(Consts.ArtworkId), Times.Once);
+            customerRepoMock.Verify(m => m.GetByIdAsync(Consts.CustomerId), Times.Once);
 
             var @event = artwork.GetUnpublishedEvents().Last();
             @event.Should().BeOfType<ArtworkReservedEvent>();
@@ -59,7 +59,7 @@ namespace Application.UnitTests.Artworks.Commands.ReserveArtwork
         {
             //Arrange
             var artworkRepoMock = new Mock<IArtworkRepository>();
-            artworkRepoMock.Setup(m => m.GetAsync(It.IsAny<Guid>()))
+            artworkRepoMock.Setup(m => m.GetByIdAsync(It.IsAny<Guid>()))
                 .ReturnsAsync((Artwork)null)
                 .Verifiable();
 

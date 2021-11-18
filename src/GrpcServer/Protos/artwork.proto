@@ -1,0 +1,24 @@
+syntax = "proto3";
+
+option csharp_namespace = "GrpcServer";
+
+import "google/protobuf/timestamp.proto";
+
+package artwork;
+
+service Artwork {
+  rpc CreateArtwork (CreateArtworkRequestModel) returns (CreateArtworkResponse);
+}
+
+message CreateArtworkRequestModel {
+  string galleryId = 1;
+  string name = 2;
+  double price = 3;
+  string currencyIsoCode = 4;
+  google.protobuf.Timestamp created = 5;
+  string creator = 6;
+}
+
+message CreateArtworkResponse {
+  string id = 1;
+}

@@ -19,13 +19,13 @@ namespace Application.Artworks.Commands.ReserveArtwork
 
         public async Task<Unit> Handle(ReserveArtworkCommand request, CancellationToken cancellationToken)
         {
-            var artwork = await _artworkRepo.GetAsync(request.ArtworkId);
+            var artwork = await _artworkRepo.GetByIdAsync(request.ArtworkId);
             if (artwork is null)
             {
                 throw new ArtworkNotFoundException(request.ArtworkId);
             }
 
-            artwork.Reserve(request.CustomerId, _customerRepo);
+            await artwork.ReserveAsync(request.CustomerId, _customerRepo);
 
             return Unit.Value;
         }
