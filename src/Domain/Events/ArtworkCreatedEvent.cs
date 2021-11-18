@@ -6,7 +6,7 @@ namespace Domain.Events
 {
     public sealed class ArtworkCreatedEvent : DomainEvent
     {
-        public ArtworkCreatedEvent(Guid aggregateRootId, string name, Money price, DateTime? created, string creator)
+        public ArtworkCreatedEvent(Guid aggregateRootId, string name, Money price, int? created, string creator)
             : base(aggregateRootId)
         {
             Name = name;
@@ -17,7 +17,7 @@ namespace Domain.Events
 
         public string Name { get; }
         public Money Price { get; }
-        public DateTime? Created { get; }
+        public int? Created { get; }
         public string Creator { get; }
     }
 }

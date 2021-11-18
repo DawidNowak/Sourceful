@@ -13,7 +13,7 @@ namespace Application.Artworks.Commands.CreateArtwork
             RuleFor(a => a.CurrencyIsoCode).NotEmpty();
 
             RuleFor(a => a.Created)
-                .LessThan(DateTime.Now)
+                .LessThan(DateTime.Now.Year)
                 .When(a => a.Created != null);
         }
     }

@@ -26,7 +26,7 @@ namespace GrpcServer.Services
                 Name = request.Name,
                 Price = Convert.ToDecimal(request.Price),
                 CurrencyIsoCode = request.CurrencyIsoCode,
-                Created = request.Created.ToDateTime(),
+                Created = request.Created,
                 Creator = request.Creator
             };
 

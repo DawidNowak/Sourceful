@@ -9,7 +9,7 @@ namespace Application.Artworks.Commands.CreateArtwork
         public string Name { get; set; }
         public decimal Price { get; set; }
         public string CurrencyIsoCode { get; set; }
-        public DateTime? Created { get; set; }
+        public int? Created { get; set; }
         public string Creator { get; set; }
     }
 }

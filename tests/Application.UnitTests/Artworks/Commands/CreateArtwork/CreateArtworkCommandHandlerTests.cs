@@ -30,7 +30,7 @@ namespace Application.UnitTests.Artworks.Commands.CreateArtwork
                 Creator = Consts.Creator,
                 Price = Consts.Price,
                 CurrencyIsoCode = Consts.PLN,
-                Created = DateTime.Now.AddDays(-7)
+                Created = DateTime.Now.Year
             };
 
             var handler = new CreateArtworkCommandHandler(artworkFactory, artworkRepoMock.Object);

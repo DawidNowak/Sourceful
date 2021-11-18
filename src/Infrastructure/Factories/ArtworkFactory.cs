@@ -7,7 +7,7 @@ namespace Infrastructure.Factories
 {
     public class ArtworkFactory : IArtworkFactory
     {
-        public Artwork Create(Guid id, Guid galleryId, string name, Money price, DateTime? created, string creator)
+        public Artwork Create(Guid id, Guid galleryId, string name, Money price, int? created, string creator)
         {
             return new Artwork(id, galleryId, name, price, created, creator);
         }

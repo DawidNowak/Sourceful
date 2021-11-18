@@ -39,7 +39,7 @@ namespace Infrastructure.Persistence.Migrations
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     Currency = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Created = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    Created = table.Column<int>(type: "int", nullable: true),
                     Creator = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ArtGalleryId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     BoughtByCustomerId = table.Column<Guid>(type: "uniqueidentifier", nullable: true),
@@ -59,13 +59,13 @@ namespace Infrastructure.Persistence.Migrations
                         column: x => x.BoughtByCustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Artworks_Customers_ReservationCustomerId",
                         column: x => x.ReservationCustomerId,
                         principalTable: "Customers",
                         principalColumn: "Id",
-                        onDelete: ReferentialAction.SetNull);
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(

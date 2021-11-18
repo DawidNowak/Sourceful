@@ -21,12 +21,12 @@ namespace Infrastructure.Persistence.Configurations
             builder.HasOne<Customer>()
                 .WithMany()
                 .HasForeignKey(a => a.ReservationCustomerId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.HasOne<Customer>()
                 .WithMany()
                 .HasForeignKey(a => a.BoughtByCustomerId)
-                .OnDelete(DeleteBehavior.SetNull);
+                .OnDelete(DeleteBehavior.ClientSetNull);
 
             builder.OwnsOne(a => a.Price, price =>
             {

@@ -19,7 +19,7 @@ namespace Domain.UnitTests.Entities
         private static Guid Id = Guid.NewGuid();
         private static Guid GalleryId = Guid.NewGuid();
         private static Guid CustomerId = Guid.NewGuid();
-        private static DateTime Created = DateTime.Now;
+        private static int Created = DateTime.Now.Year;
         private static Money Price = new(1000m, new("PLN"));
 
         [Fact]

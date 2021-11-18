@@ -46,8 +46,8 @@ namespace Infrastructure.Persistence.Migrations
                     b.Property<Guid?>("BoughtByCustomerId")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<DateTime?>("Created")
-                        .HasColumnType("datetime2");
+                    b.Property<int?>("Created")
+                        .HasColumnType("int");
 
                     b.Property<string>("Creator")
                         .IsRequired()
@@ -95,13 +95,11 @@ namespace Infrastructure.Persistence.Migrations
 
                     b.HasOne("Domain.Entities.Customer", null)
                         .WithMany()
-                        .HasForeignKey("BoughtByCustomerId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("BoughtByCustomerId");
 
                     b.HasOne("Domain.Entities.Customer", null)
                         .WithMany()
-                        .HasForeignKey("ReservationCustomerId")
-                        .OnDelete(DeleteBehavior.SetNull);
+                        .HasForeignKey("ReservationCustomerId");
 
                     b.OwnsOne("Domain.ValueObjects.Money", "Price", b1 =>
                         {

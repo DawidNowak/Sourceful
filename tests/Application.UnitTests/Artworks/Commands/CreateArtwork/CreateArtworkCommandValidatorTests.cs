@@ -19,7 +19,7 @@ namespace Application.UnitTests.Artworks.Commands.CreateArtwork
                 Creator = Consts.Creator,
                 Price = Consts.Price,
                 CurrencyIsoCode = Consts.PLN,
-                Created = DateTime.Now.AddDays(-7)
+                Created = DateTime.Now.AddYears(-1).Year
             };
 
             var validator = new CreateArtworkCommandValidator();
@@ -65,7 +65,7 @@ namespace Application.UnitTests.Artworks.Commands.CreateArtwork
                 Creator = Consts.Creator,
                 Price = Consts.Price,
                 CurrencyIsoCode = Consts.PLN,
-                Created = DateTime.Now.AddDays(7)
+                Created = DateTime.Now.AddYears(1).Year
             };
 
             var validator = new CreateArtworkCommandValidator();

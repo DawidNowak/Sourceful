@@ -12,7 +12,7 @@ namespace Domain.Entities
     {
         public string Name { get; private set; }
         public Money Price { get; private set; }
-        public DateTime? Created { get; private set; }
+        public int? Created { get; private set; }
         public string Creator { get; private set; }
         public Guid ArtGalleryId { get; private set; }
         public Guid? BoughtByCustomerId { get; private set; }
@@ -22,7 +22,7 @@ namespace Domain.Entities
         private Artwork(Guid id) : base(id)
         { }
 
-        internal Artwork(Guid id, Guid galleryId, string name, Money price, DateTime? created, string creator)
+        internal Artwork(Guid id, Guid galleryId, string name, Money price, int? created, string creator)
             : base(id)
         {
             ArtGalleryId = galleryId;
