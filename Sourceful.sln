@@ -19,6 +19,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Infrastructure", "src\Infra
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcServer", "src\GrpcServer\GrpcServer.csproj", "{CBDA4840-2356-4849-9C33-AAB0DF1D8FCF}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GrpcClient", "src\GrpcClient\GrpcClient.csproj", "{6E62F6AE-F612-4D3F-A6BC-306425048D6B}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -49,6 +51,10 @@ Global
 		{CBDA4840-2356-4849-9C33-AAB0DF1D8FCF}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CBDA4840-2356-4849-9C33-AAB0DF1D8FCF}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CBDA4840-2356-4849-9C33-AAB0DF1D8FCF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6E62F6AE-F612-4D3F-A6BC-306425048D6B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6E62F6AE-F612-4D3F-A6BC-306425048D6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6E62F6AE-F612-4D3F-A6BC-306425048D6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6E62F6AE-F612-4D3F-A6BC-306425048D6B}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -60,6 +66,7 @@ Global
 		{8ABC239E-B052-49FE-9291-9A81EB5F6A50} = {3CF97F2F-4051-48C8-94F3-61A3529244C7}
 		{42F1FAF1-CBB0-4C3B-81D8-4BE0D0B83335} = {20B78397-A551-4A7D-B263-C2EFB679084A}
 		{CBDA4840-2356-4849-9C33-AAB0DF1D8FCF} = {20B78397-A551-4A7D-B263-C2EFB679084A}
+		{6E62F6AE-F612-4D3F-A6BC-306425048D6B} = {20B78397-A551-4A7D-B263-C2EFB679084A}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {9929DBC7-752C-4B74-85C2-8EC88AEE4422}
