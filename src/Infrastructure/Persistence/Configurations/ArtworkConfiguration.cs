@@ -30,13 +30,19 @@ namespace Infrastructure.Persistence.Configurations
 
             builder.OwnsOne(a => a.Price, price =>
             {
-                price.Property(p => p.Amount)
+                price.Property(m => m.Amount)
+                    .UsePropertyAccessMode(PropertyAccessMode.Field)
                     .HasColumnName(nameof(Money.Amount))
+                    .HasColumnType("decimal(18,2)")
                     .IsRequired();
 
-                price.Property(p => p.Currency)
-                    .HasColumnName(nameof(Money.Currency))
-                    .IsRequired();
+                price.OwnsOne(m => m.Currency, money =>
+                {
+                    money.Property(c => c.IsoCode)
+                        .UsePropertyAccessMode(PropertyAccessMode.Field)
+                        .HasColumnName(nameof(Money.Currency))
+                        .IsRequired();
+                });
             });
         }
     }

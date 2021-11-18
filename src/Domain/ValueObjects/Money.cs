@@ -1,12 +1,18 @@
 ﻿using Domain.Common;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace Domain.ValueObjects
 {
     public class Money : ValueObject
     {
         public readonly decimal Amount;
+        [Required]
         public readonly Currency Currency;
+
+        //EF ctor
+        private Money()
+        { }
 
         public Money(decimal amount, Currency currency)
         {
@@ -20,6 +26,6 @@ namespace Domain.ValueObjects
             yield return Currency;
         }
 
-        public override string ToString() => $"{Amount}, {Currency.Symbol}";
+        public override string ToString() => $"{Amount} {Currency.Symbol}";
     }
 }

@@ -18,6 +18,10 @@ namespace Domain.Entities
         public Guid? BoughtByCustomerId { get; private set; }
         public Guid? ReservationCustomerId { get; private set; }
 
+        //EF ctor
+        private Artwork(Guid id) : base(id)
+        { }
+
         internal Artwork(Guid id, Guid galleryId, string name, Money price, DateTime? created, string creator)
             : base(id)
         {

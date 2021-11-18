@@ -1,6 +1,5 @@
 ﻿using Domain.Common;
 using System;
-using System.Collections.Generic;
 
 namespace Domain.Entities
 {
@@ -10,10 +9,7 @@ namespace Domain.Entities
     /// </summary>
     public class ArtGallery : Entity
     {
-        private List<Artwork> _artworks = new();
-
-        public string Name { get; }
-        public IReadOnlyCollection<Artwork> Artworks => _artworks;
+        public string Name { get; private set; }
 
         public ArtGallery(Guid id, string name) : base(id)
         {

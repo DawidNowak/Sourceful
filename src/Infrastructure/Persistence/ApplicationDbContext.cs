@@ -5,6 +5,7 @@ using Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace Infrastructure.Persistence
@@ -32,6 +33,13 @@ namespace Infrastructure.Persistence
             await base.SaveChangesAsync();
 
             await DispatchEvents(events);
+        }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.ApplyConfigurationsFromAssembly(Assembly.GetExecutingAssembly());
         }
 
         private async Task DispatchEvents(IEnumerable<DomainEvent> events)

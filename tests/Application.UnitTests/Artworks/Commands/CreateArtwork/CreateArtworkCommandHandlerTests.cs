@@ -1,8 +1,8 @@
 ﻿using Application.Artworks.Commands.CreateArtwork;
 using Domain.Contracts;
 using Domain.Entities;
-using Domain.Factories;
 using FluentAssertions;
+using Infrastructure.Factories;
 using Moq;
 using System;
 using System.Threading;
