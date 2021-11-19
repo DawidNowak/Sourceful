@@ -11,7 +11,7 @@ namespace GrpcClient
         {
             Console.WriteLine("Sourceful - Artwork grpc demo\n");
 
-            var channel = GrpcChannel.ForAddress("https://localhost:5001");
+            var channel = GrpcChannel.ForAddress("https://localhost:61877");
             var client = new Artwork.ArtworkClient(channel);
 
             var createArtworkRequest = new CreateArtworkRequestModel
