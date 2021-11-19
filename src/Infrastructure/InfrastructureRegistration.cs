@@ -20,6 +20,7 @@ namespace Infrastructure
                     configuration.GetConnectionString("SqlConnectionString"),
                     opts => opts.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName)));
 
+            services.AddScoped<IReadModelContext, ApplicationDbContextReadModelAdapter>();
             services.AddScoped<IDomainEventPublisher, DomainEventPublisher>();
 
             services.AddSingleton<IArtworkFactory, ArtworkFactory>();

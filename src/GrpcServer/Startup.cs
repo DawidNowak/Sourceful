@@ -1,4 +1,5 @@
-﻿using Application.Artworks.Commands.CreateArtwork;
+﻿using Application;
+using Application.Artworks.Commands.CreateArtwork;
 using GrpcServer.Services;
 using Infrastructure;
 using MediatR;
@@ -29,6 +30,7 @@ namespace GrpcServer
 
             services.AddMediatR(typeof(CreateArtworkCommandHandler));
             services.AddInfrastructure(Configuration);
+            services.AddApplication();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
