@@ -17,7 +17,16 @@ namespace GrpcClient
             var channel = GrpcChannel.ForAddress("https://localhost:5001");
             var client = new Artwork.ArtworkClient(channel);
 
-            WriteSeparator("Amfilada Art Gallery Artworks");
+            await GetArtworks(client);
+            await AddNetAwtwork(client);
+            await GetArtworks(client);
+
+            Console.ReadLine();
+        }
+
+        private static async Task GetArtworks(Artwork.ArtworkClient client)
+        {
+            WriteSeparator("Get Art Gallery Artworks");
 
             var getArtworksQuery = new GetArtworksByArtGalleryIdModel
             {
@@ -31,7 +40,10 @@ namespace GrpcClient
                     Console.WriteLine(ArtworkDescription(call.ResponseStream.Current));
                 }
             }
+        }
 
+        private static async Task AddNetAwtwork(Artwork.ArtworkClient client)
+        {
             WriteSeparator("Adding new artwork");
 
             var createArtworkRequest = new CreateArtworkRequestModel
@@ -46,8 +58,6 @@ namespace GrpcClient
             var reply = await client.CreateArtworkAsync(createArtworkRequest);
 
             Console.WriteLine($"Artwork ({reply.Id}) added succesfully");
-
-            Console.WriteLine();
         }
 
         private static void WriteSeparator(string text)
