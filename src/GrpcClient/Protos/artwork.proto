@@ -8,6 +8,7 @@ package artwork;
 
 service Artwork {
   rpc CreateArtwork (CreateArtworkRequestModel) returns (CreateArtworkResponse);
+  rpc GetArtworksByArtGalleryId (GetArtworksByArtGalleryIdModel) returns (stream ArtworkResponse);
 }
 
 message CreateArtworkRequestModel {
@@ -21,4 +22,17 @@ message CreateArtworkRequestModel {
 
 message CreateArtworkResponse {
   string id = 1;
+}
+
+message GetArtworksByArtGalleryIdModel {
+  string galleryId = 1;
+}
+
+message ArtworkResponse {
+  string name = 1;
+  string price = 2;
+  string creator = 3;
+  google.protobuf.Int32Value created = 4;
+  bool isReserved = 5;
+  bool isSold = 6;
 }
